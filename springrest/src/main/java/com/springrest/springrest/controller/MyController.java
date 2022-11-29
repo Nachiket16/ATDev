@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springrest.springrest.entities.Students;
 import com.springrest.springrest.services.Studentservice;
 
-@CrossOrigin(origins = "http://localhost:3000/", maxAge = 3600)
 @RestController					//Main Orders manager
 public class MyController {
 	//After Request come we will manage using methods
@@ -38,23 +37,23 @@ public class MyController {
 	
 	@GetMapping("/students/{studentId}")
 	public Students getCourse(@PathVariable String studentId) {
-		return this.studentService.getCourse(Long.parseLong(studentId));
+		return this.studentService.getStudent(Long.parseLong(studentId));
 	}
 	
 	@PostMapping("/student")
 	public Students addCourse(@RequestBody Students course) {
-		return this.studentService.addCourse(course);
+		return this.studentService.addStudent(course);
 	}
 	
 	@PutMapping("/student/{studentId}")
 	public Students updateCourse(@RequestBody Students course) {
-		return this.studentService.updateCourse(course);
+		return this.studentService.updateStudent(course);
 	}
 	
 	@DeleteMapping("/student/{studentId}")
-	public ResponseEntity<HttpStatus> deleteCourse(@PathVariable String courseId) {
+	public ResponseEntity<HttpStatus> deleteStudent(@PathVariable String studentId) {
 		try {
-			this.studentService.deleteCourse(Long.parseLong(courseId));
+			this.studentService.deleteStudent(Long.parseLong(studentId));
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch(Exception e){
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

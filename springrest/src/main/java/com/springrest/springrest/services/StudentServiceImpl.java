@@ -31,7 +31,7 @@ public class StudentserviceImpl implements Studentservice {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public Students getCourse(long courseId) {
+	public Students getStudent(long studentId) {
 		// TODO Auto-generated method stub
 //		Students c = null;
 //		for(Students course: list) {
@@ -40,36 +40,27 @@ public class StudentserviceImpl implements Studentservice {
 //				break;
 //			}
 //		}
-		return studentDao.getOne(courseId);
+		return studentDao.getOne(studentId);
 	}
 
 	@Override
-	public Students addCourse(Students course) {
+	public Students addStudent(Students student) {
 //		// TODO Auto-generated method stub
 //		list.add(course);
-		studentDao.save(course);
-		return course;
+		studentDao.save(student);
+		return student;
 	}
 
 	@Override
-	public Students updateCourse(Students course) {
-		// TODO Auto-generated method stub
-//		list.forEach(e ->{
-//			if(e.getId()== course.getId()) {
-//				e.setTitle(course.getTitle());
-//				e.setDescription(course.getDescription());
-//			}
-//		});
-		studentDao.save(course);
-		return course;
+	public Students updateStudent(Students student) {
+		
+		studentDao.save(student);
+		return student;
 	}
 
 	@Override
-	public void deleteCourse(long parseLong) {
+	public void deleteStudent(long parseLong) {
 		// TODO Auto-generated method stub
-//		list =  this.list.stream()
-//			    .filter(l -> l.getId()!= parseLong)
-//			    .collect(Collectors.toList());
 		Students entity = studentDao.getOne(parseLong);
 		studentDao.delete(entity);
 	}

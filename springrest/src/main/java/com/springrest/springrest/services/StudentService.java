@@ -7,11 +7,11 @@ import com.springrest.springrest.entities.Students;
 public interface Studentservice {
 	public List<Students> getStudents();
 	
-	public Students getCourse(long courseId);
+	public Students getStudent(long studentId);
 
-	public Students addCourse(Students course);
+	public Students addStudent(Students student);
 
-	public Students updateCourse(Students course);
+	public Students updateStudent(Students student);
 
-	public void deleteCourse(long parseLong);
+	public void deleteStudent(long parseLong);
 }
