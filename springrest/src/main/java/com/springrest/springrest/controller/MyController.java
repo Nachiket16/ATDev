@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,50 +13,53 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springrest.springrest.entities.Students;
-import com.springrest.springrest.services.Studentservice;
+import com.springrest.springrest.entities.Courses;
+import com.springrest.springrest.services.CourseService;
 
-@RestController					//Main Orders manager
+
+@RestController
 public class MyController {
-	//After Request come we will manage using methods
+	//Services obj will call impl method 
+	//Get, post, put , delet
+	//obj of course is req to call the method
 	@Autowired
-	private Studentservice studentService;
+	private CourseService courseService;
 	
-	@GetMapping("/home")		//Accept Get @ /home url
+	@GetMapping("/home")
 	public String home() {
-		return "Welcome To my Student Home Page";
+		return "Hello get api called on the local host";
 	}
 	
-	//get the Students
-	@GetMapping("/students")
-	public List<Students> getStudents(){
-		return this.studentService.getStudents();
+	//Return list<Courses> will be resturn from the DB
+	@GetMapping("/courses")
+	public List<Courses> getCourses() {
+		return this.courseService.getCourses();
 	}
 	
-	
-	@GetMapping("/students/{studentId}")
-	public Students getCourse(@PathVariable String studentId) {
-		return this.studentService.getStudent(Long.parseLong(studentId));
+	@GetMapping("/courses/{courseId}")
+	public Courses getCourse(@PathVariable String courseId) {
+		return this.courseService.getCourse(Long.parseLong(courseId));
 	}
 	
-	@PostMapping("/student")
-	public Students addCourse(@RequestBody Students course) {
-		return this.studentService.addStudent(course);
+	@PostMapping("/courses")
+	public Courses addCourses(@RequestBody Courses courses) {
+		return this.courseService.addCourses(courses);
 	}
 	
-	@PutMapping("/student/{studentId}")
-	public Students updateCourse(@RequestBody Students course) {
-		return this.studentService.updateStudent(course);
+	@PutMapping("/courses/{courseId}")
+	public Courses updateCourses(@RequestBody Courses courses) {
+		return this.courseService.updateCourses(courses);
 	}
 	
-	@DeleteMapping("/student/{studentId}")
-	public ResponseEntity<HttpStatus> deleteStudent(@PathVariable String studentId) {
+	@DeleteMapping("/courses/{courseId}")
+	public ResponseEntity<HttpStatus> deleteCourses(@PathVariable String courseId) {
 		try {
-			this.studentService.deleteStudent(Long.parseLong(studentId));
-			return new ResponseEntity<>(HttpStatus.OK);
-		}catch(Exception e){
+			this.courseService.deleteCourses(Long.parseLong(courseId));
+			return new  ResponseEntity<>(HttpStatus.OK);
+		}catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 	
 }
